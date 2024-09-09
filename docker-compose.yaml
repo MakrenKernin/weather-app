@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    image: saintanist/weather-app:latest
+    container_name: weather_app
+    ports:
+      - '5000:5000'
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=30

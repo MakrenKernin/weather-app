@@ -19,7 +19,8 @@ def get_weather(city):
         return jsonify({
             'city': city,
             'temperature': data['main']['temp'],
-            'description': data['weather'][0]['description']
+            'description': data['weather'][0]['description'],
+            'humidity': data['main']['humidity']  # Новое поле с влажностью
         })
     else:
         return jsonify({'error': 'City not found'}), 404
